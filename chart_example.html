@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" charset="big5">
+    
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+      
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+      
+    function drawChart() {
+		var jsonData = '[["2014-12-26", 9158.39, 9171.91, 9214.07, 9214.07], ["2014-12-26", 9173.0, 9178.0, 9227.0, 9230.0], ["2014-12-26", 9172.0, 9175.0, 9227.0, 9228.0], ["2014-12-26", 9177.0, 9183.0, 9222.0, 9222.0], ["2014-12-26", 9157.0, 9157.0, 9207.0, 9207.0]]';
+		var jsonData_future10 =  '[["2015-01-07", 27631.0, 29058.0], ["2015-01-06", 26708.0, 29191.0], ["2015-01-05", 31299.0, 29788.0], ["2014-12-30", 31280.0, 28425.0], ["2014-12-29", 32202.0, 28857.0]]';    
+		var options = {
+		title : '期貨走勢',
+		vAxis: {title: "Value"},
+		bar: {groupWidth: "95%"},      
+		legend:'none',
+		candlestick.risingColor.fill:{color: 'red'},
+		candlestick.fallingColor.fill:{color: 'green'},
+		chartArea:{left:20,top:20,width:'90%',height:'90%'},
+		};
+		var array=$.parseJSON( jsonData);
+		var data =google.visualization.arrayToDataTable(array,true);
+		var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+		chart.draw(data, options);
+		var options_future10 = {
+		title: 'Company Performance',
+		hAxis: {title:  "日期", titleTextStyle: {color: 'red'}},
+		chartArea:{left:20,top:20,width:'90%',height:'90%'}
+    };
+    var array_future10=$.parseJSON( jsonData_future10);
+    var data_future10 =google.visualization.arrayToDataTable(array_future10,true);
+    var barchart = new google.visualization.ColumnChart(document.getElementById('future10_div'));
+
+    barchart.draw(data_future10, options_future10);
+
+    }
+
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <div id="future10_div" style="width: 900px; height: 300px;"></div>
+  </body>
+</html>

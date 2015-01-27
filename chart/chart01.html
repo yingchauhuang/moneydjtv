@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" charset="big5">
+    
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages':['corechart']});
+      
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+      
+    function drawChart() {
+      var jsonData = $.ajax({
+          url: "getData.php",
+          dataType:"json",
+          async: false
+          }).responseText;
+      var jsonData_future10 =  $.ajax({
+          url: "getData_future10.php",
+          dataType:"json",
+          async: false
+          }).responseText;    
+      var options = {
+      title : '台灣加權指數走勢',
+      vAxis: {title: "Value"},
+      bar: {groupWidth: "95%"},      
+      legend:'none',
+      chartArea:{left:20,top:20,width:'90%',height:'90%'},
+    };
+    var array=$.parseJSON( jsonData);
+    var data =google.visualization.arrayToDataTable(array,true);
+    var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+    chart.draw(data, options);
+
+    }
+
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <script type='text/javascript' src='https://public.tableausoftware.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1444px; height: 631px;'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;publicrevizit.tableausoftware.com&#47;static&#47;images&#47;_2&#47;_2460&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1444' height='631' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableausoftware.com%2F' /> <param name='site_root' value='' /><param name='name' value='_2460&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;publicrevizit.tableausoftware.com&#47;static&#47;images&#47;_2&#47;_2460&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /></object></div><div style='width:1444px;height:22px;padding:0px 10px 0px 0px;color:black;font:normal 8pt verdana,helvetica,arial,sans-serif;'><div style='float:right; padding-right:8px;'><a href='http://www.tableausoftware.com/public/about-tableau-products?ref=https://public.tableausoftware.com/views/_2460/Sheet1' target='_blank'>Learn About Tableau</a></div></div>
+</body>
+</html>

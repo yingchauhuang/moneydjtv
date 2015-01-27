@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+	<html class="decks fullscreen loaded ua-phantomjs reveal-viewport theme-font-montserrat theme-color-white-blue">
+{% block header %}
+{% include "TVNews_header.html" %}
+{% endblock %}
+<body>
+<div class="reveal">
+	<div class="slides">
+	{% block slider1 %}
+	{% endblock %}
+	{% block slider2 %}
+	{% endblock %}
+	{% block slider3 %}
+	{% endblock %}
+	</div>
+</div>
+
+<script src="moneydjtv_slide.js"></script>
+<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				mouseWheel: false,
+
+				autoSlide: 0,
+				autoSlideStoppable: true,
+
+				rollingLinks: false,
+				center:  false,
+				loop:  false,
+				rtl:  false,
+
+				transition: "slide",
+				backgroundTransition: "slide",
+			});
+
+			if( window.hljs ) hljs.initHighlightingOnLoad();
+
+</script>
+</body>
+</html>
+	
